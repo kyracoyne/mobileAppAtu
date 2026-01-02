@@ -14,5 +14,10 @@
     </ion-card-content>
   </ion-card>
 
-  <p>Hello from the Home page.</p>
+  <ion-item>
+    <ion-label position="stacked">Ingredients (comma separated)</ion-label>
+    <ion-input placeholder="e.g. chicken, rice, garlic" [(ngModel)]="ingredients"></ion-input>
+  </ion-item> 
+  <!-- function defined in home.page.ts when user clicks the search button -->
+  <ion-button expand="block" class="ion-margin-top" (click)="onSearchClicked()"> Search </ion-button>
 </ion-content>

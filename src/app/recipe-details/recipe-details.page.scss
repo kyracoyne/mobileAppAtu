@@ -1,0 +1,14 @@
+/* Recipe title styling */
+.recipe-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* Control recipe image size */
+.recipe-image::part(image) {
+  height: 220px;      /* smaller than before */
+  width: 100%;
+  object-fit: cover; /* keeps aspect ratio */
+  border-radius: 8px;
+}

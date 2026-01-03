@@ -28,6 +28,7 @@
     </div>
     <ion-card-header>
       <ion-card-title class="recipe-title">{{ recipe.title }}</ion-card-title>
+      <ion-button size="small" class="ion-margin-top" [routerLink]="['/recipe-details', recipe.id]"> Details </ion-button>
     </ion-card-header>
   </ion-card>
 </ion-content>

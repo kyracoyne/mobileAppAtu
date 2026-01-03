@@ -1,13 +1,33 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>recipe-details</ion-title>
+    <ion-title>Recipe Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">recipe-details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <!-- Show error if something went wrong -->
+  <p *ngIf="errorMsg">
+    {{ errorMsg }}
+  </p>
+
+  <!-- Show recipe once it has loaded -->
+  <div *ngIf="recipe">
+    <!-- Recipe title above the image -->
+    <h2 class="recipe-title">{{ recipe.title }}</h2>
+    <!-- Recipe image -->
+    <ion-img
+      *ngIf="recipe.image" class="recipe-image" [src]="recipe.image" [alt]="recipe.title">
+    </ion-img>
+    <p *ngIf="recipe.readyInMinutes">
+      Ready in {{ recipe.readyInMinutes }} minutes
+    </p>
+    <p *ngIf="recipe.servings">
+      Servings: {{ recipe.servings }}
+    </p>
+  </div>
+  <!-- Simple loading hint -->
+  <p *ngIf="!recipe && !errorMsg">
+    Loading recipe...
+  </p>
+
 </ion-content>

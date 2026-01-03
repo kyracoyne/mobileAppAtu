@@ -5,8 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonImg, IonButtons, IonBut
 import { ActivatedRoute } from '@angular/router';
 import { SpoonacularService } from '../services/spoonacular';
 import { Router } from '@angular/router'; // added for back button
-import { arrowBackOutline } from 'ionicons/icons'; // added for back button
-
+import { arrowBackOutline, heartOutline } from 'ionicons/icons'; // added for back and favourite buttons
 @Component({
   selector: 'app-recipe-details',
   templateUrl: './recipe-details.page.html',
@@ -19,6 +18,7 @@ export class RecipeDetailsPage implements OnInit {
   recipe: any = null;
   errorMsg: string = '';
   arrowBackOutline = arrowBackOutline;
+  heartOutline = heartOutline;
   constructor(
     private route: ActivatedRoute,
     private spoon: SpoonacularService,
@@ -52,5 +52,9 @@ export class RecipeDetailsPage implements OnInit {
   goBackHome() {
     this.router.navigate(['/home']);
   }
-  
+  // Placeholder for favourites 
+  onAddToFavouritesClicked() {
+    console.log('Add to favourites clicked for recipe:', this.recipe?.id, this.recipe?.title);
+  }
+
 }

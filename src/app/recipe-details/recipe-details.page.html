@@ -56,6 +56,15 @@
       <h3>Instructions</h3>
       <p>No instructions provided.</p>
     </div>
+    <!-- Favourites button-->
+    <ion-button
+      size="small"
+      fill="clear"
+      class="ion-margin-top"
+      (click)="onAddToFavouritesClicked()">
+      <ion-icon slot="start" [icon]="heartOutline">></ion-icon>
+      Favourite
+    </ion-button>
   </div>
 
   <!-- Simple loading hint -->

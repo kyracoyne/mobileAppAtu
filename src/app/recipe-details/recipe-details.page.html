@@ -1,5 +1,10 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBackHome()">
+        <ion-icon [icon]="arrowBackOutline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Recipe Details</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -24,7 +29,35 @@
     <p *ngIf="recipe.servings">
       Servings: {{ recipe.servings }}
     </p>
+    <!-- Ingredients with thumbnail image -->
+    <div *ngIf="recipe.extendedIngredients?.length">
+      <h3>Ingredients</h3>
+      <ion-list>
+        <ion-item *ngFor="let ing of recipe.extendedIngredients">
+          <!-- Thumbnail only if ingredient image exists -->
+          <ion-thumbnail slot="start" *ngIf="ing.image">
+            <img [src]="getIngredientImageUrl(ing.image)" [alt]="ing.name" />
+          </ion-thumbnail>
+          <ion-label> {{ ing.original }} </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    <!-- Instructions (step-by-step) -->
+    <div *ngIf="recipe.analyzedInstructions?.length && recipe.analyzedInstructions[0].steps?.length">
+      <h3>Instructions</h3>
+      <ion-list>
+        <ion-item *ngFor="let s of recipe.analyzedInstructions[0].steps">
+          <ion-label><strong>Step {{ s.number }}</strong><br />{{ s.step }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    <!-- Fallback if no analysed steps provided -->
+    <div *ngIf="!(recipe.analyzedInstructions?.length && recipe.analyzedInstructions[0].steps?.length)">
+      <h3>Instructions</h3>
+      <p>No instructions provided.</p>
+    </div>
   </div>
+
   <!-- Simple loading hint -->
   <p *ngIf="!recipe && !errorMsg">
     Loading recipe...

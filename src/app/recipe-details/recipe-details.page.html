@@ -1,11 +1,14 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="goBackHome()">
-        <ion-icon [icon]="arrowBackOutline"></ion-icon>
+      <ion-button fill="clear" size="small" (click)="goBackHome()" aria-label="Back to home">
+        <ion-icon [icon]="arrowBackOutline" slot="start"></ion-icon>Home
       </ion-button>
     </ion-buttons>
     <ion-title>Recipe Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" size="small" (click)="goToFavourites()">Favourites</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

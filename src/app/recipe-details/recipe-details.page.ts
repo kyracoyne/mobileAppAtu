@@ -64,6 +64,10 @@ export class RecipeDetailsPage implements OnInit {
   goBackHome() {
     this.router.navigate(['/home']);
   }
+  // Method to go to favourites page from recipe 
+  goToFavourites() {
+    this.router.navigate(['/favourites']);
+  }
 
   // Method tied to favourites button to save the recipe to storage 
   async onAddToFavouritesClicked(): Promise<void> {

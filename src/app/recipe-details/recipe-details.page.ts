@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { SpoonacularService } from '../services/spoonacular';
 import { Router } from '@angular/router'; // added for back button
 import { arrowBackOutline, heartOutline } from 'ionicons/icons'; // added for back and favourite buttons
+import { FavouritesService, FavouriteRecipe } from '../services/favourites';
+
 @Component({
   selector: 'app-recipe-details',
   templateUrl: './recipe-details.page.html',
@@ -22,7 +24,8 @@ export class RecipeDetailsPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private spoon: SpoonacularService,
-    private router: Router
+    private router: Router,
+    private favouritesService: FavouritesService
   ) {}
 
   ngOnInit() {
@@ -52,9 +55,18 @@ export class RecipeDetailsPage implements OnInit {
   goBackHome() {
     this.router.navigate(['/home']);
   }
-  // Placeholder for favourites 
-  onAddToFavouritesClicked() {
-    console.log('Add to favourites clicked for recipe:', this.recipe?.id, this.recipe?.title);
+
+  // Method tied to favourites button to save the recipe to storage 
+  async onAddToFavouritesClicked(): Promise<void> {
+    // Build the object to store
+    const fave: FavouriteRecipe = {
+      id: this.recipe.id,
+      title: this.recipe.title,
+      image: this.recipe.image
+    };
+    // Save it via the service
+    await this.favouritesService.addToFavourites(fave);
+    console.log('Saved to favourites = ', fave);
   }
 
 }

@@ -62,8 +62,8 @@
       fill="clear"
       class="ion-margin-top"
       (click)="onAddToFavouritesClicked()">
-      <ion-icon slot="start" [icon]="heartOutline">></ion-icon>
-      Favourite
+      <ion-icon slot="start" [icon]="isFavourite ? heart : heartOutline"></ion-icon>
+      {{ isFavourite ? 'Remove From Favourites' : 'Add to Favourites' }}
     </ion-button>
   </div>
 

@@ -5,7 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonImg, IonButtons, IonBut
 import { ActivatedRoute } from '@angular/router';
 import { SpoonacularService } from '../services/spoonacular';
 import { Router } from '@angular/router'; // added for back button
-import { arrowBackOutline, heartOutline } from 'ionicons/icons'; // added for back and favourite buttons
+import { arrowBackOutline, heartOutline, heart } from 'ionicons/icons'; // added for back and favourite buttons
 import { FavouritesService, FavouriteRecipe } from '../services/favourites';
 
 @Component({
@@ -18,9 +18,11 @@ import { FavouritesService, FavouriteRecipe } from '../services/favourites';
 export class RecipeDetailsPage implements OnInit {
   recipeId: number = 0;
   recipe: any = null;
+  isFavourite: boolean = false; // for favourite recipe toggle 
   errorMsg: string = '';
   arrowBackOutline = arrowBackOutline;
-  heartOutline = heartOutline;
+  heartOutline = heartOutline; // outline of heart when not favourited 
+  heart = heart; // filled heart when favourited
   constructor(
     private route: ActivatedRoute,
     private spoon: SpoonacularService,
@@ -36,15 +38,22 @@ export class RecipeDetailsPage implements OnInit {
     this.recipe = null;
 
     this.spoon.getRecipeDetailsById(this.recipeId)
-      .then(response => {
-        console.log('Recipe details raw response:', response);
-        console.log('Recipe details data:', response.data);
-        this.recipe = response.data;
-      })
-      .catch(err => {
-        console.error('Recipe details error:', err);
-        this.errorMsg = 'Failed to fetch recipe details.';
-      });
+    .then(response => {
+      console.log('Recipe details raw response:', response);
+      console.log('Recipe details data:', response.data);
+      // Loaded recipe
+      this.recipe = response.data;
+      // Check if already a favourite
+      this.favouritesService.isFavourite(this.recipe.id)
+        .then(result => {
+          this.isFavourite = result;
+          console.log('Checking if recipe is favourite = ', this.isFavourite);
+        });
+    })
+    .catch(err => {
+      console.error('Recipe details error:', err);
+      this.errorMsg = 'Failed to fetch recipe details.';
+    });
   }
 
   getIngredientImageUrl(imageFileName: string): string {
@@ -64,9 +73,16 @@ export class RecipeDetailsPage implements OnInit {
       title: this.recipe.title,
       image: this.recipe.image
     };
-    // Save it via the service
-    await this.favouritesService.addToFavourites(fave);
-    console.log('Saved to favourites = ', fave);
+    // Add to favourites if not present, remove if is 
+    if (this.isFavourite) {
+      await this.favouritesService.removeFromFavourites(this.recipe.id);
+      this.isFavourite = false;
+      console.log('Removed from favourites = ', this.recipe.id);
+    } else {
+      await this.favouritesService.addToFavourites(fave);
+      this.isFavourite = true;
+      console.log('Added to favourites = ', this.recipe.id);
+    }
   }
 
 }

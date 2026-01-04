@@ -11,7 +11,7 @@
   </p>
   <!-- Show any saved favourites -->
   <ion-list *ngIf="favourites.length > 0">
-    <ion-item *ngFor="let fave of favourites">
+    <ion-item *ngFor="let fave of favourites" button (click)="openRecipeDetails(fave.id)">
       <ion-img
         [src]="fave.image"
         [alt]="fave.title"
@@ -22,6 +22,17 @@
         <h2>{{ fave.title }}</h2>
         <p>ID: {{ fave.id }}</p>
       </ion-label>
+      <!-- Remove from favourites button -->
+      <ion-buttons slot="end">
+        <ion-button
+          fill="clear"
+          size="small"
+          (click)="removeFavourite(fave.id); $event.stopPropagation()"
+          aria-label="Remove from favourites">
+          <ion-icon [icon]="trashBinOutline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      
     </ion-item>
   </ion-list>
 </ion-content>

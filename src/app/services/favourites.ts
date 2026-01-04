@@ -67,5 +67,16 @@ export class FavouritesService {
     }
     await this.saveAllFavourites(updatedFavourites);
   }
+
+  // Check if a recipe is already in favourites
+  async isFavourite(id: number): Promise<boolean> {
+    const favourites = await this.getAllFavourites();
+    for (const fave of favourites) {
+      if (fave.id === id) {
+        return true;
+      }
+    }
+    return false;
+  }
   
 }

@@ -48,4 +48,8 @@ export class HomePage {
   goToFavourites() {
     this.router.navigate(['/favourites']);
   }
+  // Navigation to settings page from home page 
+  goToSettings() {
+    this.router.navigate(['/settings']);
+  }
 }

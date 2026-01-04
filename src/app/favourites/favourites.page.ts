@@ -5,6 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel
 import { FavouritesService, FavouriteRecipe } from '../services/favourites';
 import { Router } from '@angular/router'; // for routing back to recipe from favourites 
 import { trashBinOutline } from 'ionicons/icons'; // Remove recipe from favourites on favourites page
+import { arrowBackOutline } from 'ionicons/icons'; // Add navigation back to home page 
 
 @Component({
   selector: 'app-favourites',
@@ -17,6 +18,7 @@ import { trashBinOutline } from 'ionicons/icons'; // Remove recipe from favourit
 export class FavouritesPage implements OnInit {
   favourites: FavouriteRecipe[] = [];
   trashBinOutline = trashBinOutline;
+  arrowBackOutline = arrowBackOutline; 
   constructor(
     private favouritesService: FavouritesService,
     private router: Router
@@ -40,5 +42,9 @@ export class FavouritesPage implements OnInit {
   async removeFavourite (id: number): Promise<void>{
     await this.favouritesService.removeFromFavourites(id);
     await this.loadFavourites();
+  }
+  // For back button to get back to home page from favourites 
+  goBackHome() {
+    this.router.navigate(['/home']);
   }
 }

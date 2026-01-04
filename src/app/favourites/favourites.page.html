@@ -1,5 +1,10 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBackHome()" aria-label="Back to home">
+        <ion-icon [icon]="arrowBackOutline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Favourites</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -32,7 +37,7 @@
           <ion-icon [icon]="trashBinOutline"></ion-icon>
         </ion-button>
       </ion-buttons>
-      
+
     </ion-item>
   </ion-list>
 </ion-content>

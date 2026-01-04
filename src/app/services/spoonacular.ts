@@ -22,13 +22,15 @@ export class SpoonacularService {
   }
 
   // For recipe details 
-  getRecipeDetailsById(id: number) {
+  getRecipeDetailsById(id: number, unit: 'metric' | 'us') {
     const options: HttpOptions = {
       url: `${this.APIURL}/${id}/information`,
       params: {
-        apiKey: this.APIKEY
+        apiKey: this.APIKEY,
+        units: unit,
       }
     };
     return CapacitorHttp.get(options);
   }
+
 }

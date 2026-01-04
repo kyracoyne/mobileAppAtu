@@ -7,6 +7,7 @@ import { SpoonacularService } from '../services/spoonacular';
 import { Router } from '@angular/router'; // added for back button
 import { arrowBackOutline, heartOutline, heart } from 'ionicons/icons'; // added for back and favourite buttons
 import { FavouritesService, FavouriteRecipe } from '../services/favourites';
+import { SettingsService, MeasurementUnit } from '../services/settings';
 
 @Component({
   selector: 'app-recipe-details',
@@ -23,21 +24,24 @@ export class RecipeDetailsPage implements OnInit {
   arrowBackOutline = arrowBackOutline;
   heartOutline = heartOutline; // outline of heart when not favourited 
   heart = heart; // filled heart when favourited
+  selectedUnit: MeasurementUnit = 'metric';
   constructor(
     private route: ActivatedRoute,
     private spoon: SpoonacularService,
     private router: Router,
-    private favouritesService: FavouritesService
+    private favouritesService: FavouritesService,
+    private settingsService: SettingsService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.recipeId = Number(this.route.snapshot.paramMap.get('id'));
     console.log('Recipe ID:', this.recipeId);
 
     this.errorMsg = '';
     this.recipe = null;
+    this.selectedUnit = await this.settingsService.getMeasurementUnit();
 
-    this.spoon.getRecipeDetailsById(this.recipeId)
+    this.spoon.getRecipeDetailsById(this.recipeId, this.selectedUnit)
     .then(response => {
       console.log('Recipe details raw response:', response);
       console.log('Recipe details data:', response.data);

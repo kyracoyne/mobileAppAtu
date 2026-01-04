@@ -41,7 +41,7 @@
           <ion-thumbnail slot="start" *ngIf="ing.image">
             <img [src]="getIngredientImageUrl(ing.image)" [alt]="ing.name" />
           </ion-thumbnail>
-          <ion-label> {{ ing.original }} </ion-label>
+          <ion-label>{{ ing.measures?.[selectedUnit]?.amount }} {{ ing.measures?.[selectedUnit]?.unitShort }} {{ ing.name }}</ion-label>
         </ion-item>
       </ion-list>
     </div>

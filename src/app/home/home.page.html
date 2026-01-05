@@ -2,8 +2,12 @@
   <ion-toolbar>
     <ion-title>Recipe Finder</ion-title>
     <ion-buttons slot="end">
-      <ion-button size="small" (click)="goToFavourites()">Favourites</ion-button>
-      <ion-button size="small" (click)="goToSettings()">Settings</ion-button>
+      <ion-button fill="clear" (click)="goToFavourites()" aria-label="Go to favourites">
+        <ion-icon [icon]="heart"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="goToSettings()" aria-label="Go to settings">
+        <ion-icon [icon]="settingsOutline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

@@ -2,21 +2,24 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonLabel, IonInput, IonButton, IonButtons, IonImg } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonLabel, IonInput, IonButton, IonButtons, IonImg, IonIcon } from '@ionic/angular/standalone';
 import { SpoonacularService } from '../services/spoonacular';
 import { Router } from '@angular/router';
+import { heart, settingsOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [ CommonModule, FormsModule, RouterLink, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonLabel, IonInput, IonButton, IonButtons, IonImg ],
+  imports: [ CommonModule, FormsModule, RouterLink, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonLabel, IonInput, IonButton, IonButtons, IonImg, IonIcon ],
 })
 export class HomePage {
   ingredients: string = '';
   lastSearch: string = '';
   recipes: any[] = [];
   errorMsg: string = '';
+  heart = heart;
+  settingsOutline = settingsOutline;
 
   constructor(
     private spoon: SpoonacularService,

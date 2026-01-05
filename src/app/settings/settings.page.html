@@ -24,4 +24,21 @@
     </ion-radio-group>
   </ion-list>
 
+  <h2>Change Theme:</h2>
+  <ion-list>
+    <ion-radio-group
+      name="themeSetting"
+      [(ngModel)]="selectedTheme"
+      (ionChange)="onThemeChanged($event.detail.value)">
+      <ion-item>
+        <ion-label>Light</ion-label>
+        <ion-radio slot="start" value="light"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Dark</ion-label>
+        <ion-radio slot="start" value="dark"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
 </ion-content>

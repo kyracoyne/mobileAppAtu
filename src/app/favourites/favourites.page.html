@@ -22,11 +22,13 @@
         [alt]="fave.title"
         style="width: 90px; height: 70px; object-fit: cover; margin-right: 12px; border-radius: 6px;"
       ></ion-img>
-
       <ion-label>
         <h2>{{ fave.title }}</h2>
-        <p>ID: {{ fave.id }}</p>
       </ion-label>
+      <!-- Navigate to Recipe via button -->
+      <ion-button slot="end" size="small" (click)="openRecipeDetails(fave.id)"aria-label="Open recipe details">
+        Go to Recipe Details
+      </ion-button>
       <!-- Remove from favourites button -->
       <ion-buttons slot="end">
         <ion-button

@@ -7,7 +7,14 @@
     </ion-buttons>
     <ion-title>Recipe Details</ion-title>
     <ion-buttons slot="end">
-      <ion-button fill="clear" size="small" (click)="goToFavourites()">Favourites</ion-button>
+      <!-- Favourites icon (nav only) -->
+      <ion-button fill="clear" (click)="goToFavourites()" aria-label="Go to favourites">
+        <ion-icon [icon]="heart"></ion-icon>
+      </ion-button>
+      <!-- Settings icon -->
+      <ion-button fill="clear" (click)="goToSettings()" aria-label="Go to settings">
+        <ion-icon [icon]="settingsOutline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

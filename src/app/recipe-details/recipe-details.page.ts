@@ -5,7 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonImg, IonButtons, IonBut
 import { ActivatedRoute } from '@angular/router';
 import { SpoonacularService } from '../services/spoonacular';
 import { Router } from '@angular/router'; // added for back button
-import { arrowBackOutline, heartOutline, heart } from 'ionicons/icons'; // added for back and favourite buttons
+import { arrowBackOutline, heartOutline, heart, settingsOutline } from 'ionicons/icons'; // added for back and favourite buttons
 import { FavouritesService, FavouriteRecipe } from '../services/favourites';
 import { SettingsService, MeasurementUnit } from '../services/settings';
 
@@ -23,7 +23,8 @@ export class RecipeDetailsPage implements OnInit {
   errorMsg: string = '';
   arrowBackOutline = arrowBackOutline;
   heartOutline = heartOutline; // outline of heart when not favourited 
-  heart = heart; // filled heart when favourited
+  heart = heart; // filled heart when favourited + for favourites navigation
+  settingsOutline = settingsOutline; // to navigate to settings
   selectedUnit: MeasurementUnit = 'metric';
   constructor(
     private route: ActivatedRoute,
@@ -71,6 +72,10 @@ export class RecipeDetailsPage implements OnInit {
   // Method to go to favourites page from recipe 
   goToFavourites() {
     this.router.navigate(['/favourites']);
+  }
+  // To navigate to the settings page 
+  goToSettings() {
+    this.router.navigate(['/settings']);
   }
 
   // Method tied to favourites button to save the recipe to storage 
